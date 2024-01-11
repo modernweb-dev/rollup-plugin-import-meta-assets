@@ -1,0 +1,99 @@
+{
+  "name": "@web/rollup-plugin-import-meta-assets",
+  "version": "2.2.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Rollup plugin that detects assets references relative to modules using patterns such as `new URL('./path/to/asset.ext', import.meta.url)`. The assets are added to the rollup pipeline, allowing them to be transformed and hash the filenames.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/modernweb-dev/web.git",
+    "directory": "packages/rollup-plugin-import-meta-assets"
+  },
+  "author": "modern-web",
+  "homepage": "https://github.com/modernweb-dev/web/tree/master/packages/rollup-plugin-import-meta-assets",
+  "main": "src/index.js",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./src/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "npm run test:node",
+    "test:node": "mocha test/**/*.test.js test/*.test.js --reporter dot",
+    "test:update-snapshots": "mocha test/**/*.test.js test/*.test.js --update-snapshots",
+    "test:watch": "npm run test:node -- --watch",
+    "format": "npm run format:eslint && npm run format:prettier",
+    "format:eslint": "eslint --ext .ts,.js,.mjs,.cjs . --fix",
+    "format:prettier": "prettier \"**/*.{ts,js,mjs,cjs,md}\" \"**/package.json\" --write --ignore-path .eslintignore",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "lint:eslint": "eslint --ext .ts,.js,.mjs,.cjs .",
+    "lint:prettier": "prettier \"**/*.{ts,js,mjs,cjs,md}\" --check --ignore-path .eslintignore"
+  },
+  "files": [
+    "*.js",
+    "*.mjs",
+    "dist",
+    "src"
+  ],
+  "keywords": [
+    "rollup",
+    "plugin",
+    "import-meta"
+  ],
+  "dependencies": {
+    "@rollup/plugin-dynamic-import-vars": "^2.1.0",
+    "@rollup/pluginutils": "^5.0.2",
+    "estree-walker": "^2.0.2",
+    "globby": "^13.2.2",
+    "magic-string": "^0.30.0"
+  },
+  "types": "dist/index",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.18.1",
+    "chai": "^4.4.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "hanbi": "^1.0.3",
+    "mocha": "^10.2.0",
+    "prettier": "^3.1.1",
+    "rollup": "^4.9.4"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "printWidth": 100,
+    "trailingComma": "all"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "eslint-config-prettier",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "env": {
+      "browser": true,
+      "node": true,
+      "mocha": true,
+      "es2020": true
+    },
+    "rules": {
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-empty-interface": "off",
+      "@typescript-eslint/no-unused-vars": "error",
+      "@typescript-eslint/no-var-requires": "off",
+      "@typescript-eslint/ban-ts-comment": "off"
+    }
+  }
+}
